@@ -1,15 +1,12 @@
+import type { Context } from "hono";
+
 type stateType = "success" | "error";
 
-export class SendResponse<T> {
-	public exito: stateType;
-	public estado: number;
-	public mensaje: string;
-	public data: T;
-
-	constructor(exito: stateType, estado: number, mensaje: string, data: T) {
-		this.exito = exito;
-		this.estado = estado;
-		this.mensaje = mensaje;
-		this.data = data;
-	}
+export const sendResponse = <T>(c: Context, exito: stateType, estado: number, mensaje: string, data: T) => {
+  return c.json({
+    exito,
+    estado,
+    mensaje,
+    data
+  })
 }
